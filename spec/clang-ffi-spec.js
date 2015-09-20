@@ -1,14 +1,18 @@
 'use babel';
 
+import path from 'path';
 import libclang from '../lib/clang-ffi';
 
 describe('libclang', () => {
-  it('should create an index', () => {
-    const index = libclang.clang_createIndex(0, 0);
-    expect(index).toBeDefined();
-    expect(index).not.toEqual(0);
-    libclang.clang_disposeIndex(index);
+  describe('index operations', () => {
+    it('should create an index', () => {
+      const index = libclang.clang_createIndex(0, 0);
+      expect(index).toBeDefined();
+      expect(index).not.toEqual(0);
+      libclang.clang_disposeIndex(index);
+    });
   });
+
   describe('translation unit operations', () => {
     let index;
     beforeEach(() => { index = libclang.clang_createIndex(0, 0); });
@@ -16,7 +20,7 @@ describe('libclang', () => {
 
     it('should compile a valid c++ file', () => {
       const tunit = libclang.clang_createTranslationUnitFromSourceFile(
-          index, 'input/hello.cpp', 0, 0, 0, 0);
+          index, path.join(__dirname, 'input/hello.cpp'), 0, 0, 0, 0);
       expect(tunit).toBeDefined();
       expect(index).not.toEqual(0);
       libclang.clang_disposeTranslationUnit(tunit);
@@ -24,7 +28,7 @@ describe('libclang', () => {
 
     it('should diagnose an invalid c++ file', () => {
       const tunit = libclang.clang_createTranslationUnitFromSourceFile(
-          index, 'input/deadbeef.cpp', 0, 0, 0, 0);
+          index, path.join(__dirname, 'input/missing_std.cpp'), 0, 0, 0, 0);
       expect(tunit).toBeDefined();
       expect(tunit).not.toEqual(0);
 
@@ -39,7 +43,7 @@ describe('libclang', () => {
       const diagMessage = libclang.clang_formatDiagnostic(
           diag, libclang.clang_defaultDiagnosticDisplayOptions());
       expect(diagMessage.toString().length).toBeGreaterThan(0);
-      libclang.clang_disposeString(diagCxString);
+      libclang.clang_disposeString(diagMessage);
 
       libclang.clang_disposeTranslationUnit(tunit);
     });
