@@ -1,6 +1,6 @@
 {
   "name": "atom-clang",
-  "main": "./lib/atom-clang",
+  "main": "./lib/main",
   "version": "0.1.0",
   "description": "Clang integration for atom",
   "keywords": [],
