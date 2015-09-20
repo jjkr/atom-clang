@@ -12,28 +12,28 @@ describe "AtomClangGen", ->
     workspaceElement = atom.views.getView(atom.workspace)
     activationPromise = atom.packages.activatePackage('atom-clang-gen')
 
-  describe "when the atom-clang-gen:toggle event is triggered", ->
+  describe "when the atom-clang:toggle event is triggered", ->
     it "hides and shows the modal panel", ->
       # Before the activation event the view is not on the DOM, and no panel
       # has been created
-      expect(workspaceElement.querySelector('.atom-clang-gen')).not.toExist()
+      expect(workspaceElement.querySelector('.atom-clang')).not.toExist()
 
       # This is an activation event, triggering it will cause the package to be
       # activated.
-      atom.commands.dispatch workspaceElement, 'atom-clang-gen:toggle'
+      atom.commands.dispatch workspaceElement, 'atom-clang:toggle'
 
       waitsForPromise ->
         activationPromise
 
       runs ->
-        expect(workspaceElement.querySelector('.atom-clang-gen')).toExist()
+        expect(workspaceElement.querySelector('.atom-clang')).toExist()
 
-        atomClangGenElement = workspaceElement.querySelector('.atom-clang-gen')
+        atomClangGenElement = workspaceElement.querySelector('.atom-clang')
         expect(atomClangGenElement).toExist()
 
         atomClangGenPanel = atom.workspace.panelForItem(atomClangGenElement)
         expect(atomClangGenPanel.isVisible()).toBe true
-        atom.commands.dispatch workspaceElement, 'atom-clang-gen:toggle'
+        atom.commands.dispatch workspaceElement, 'atom-clang:toggle'
         expect(atomClangGenPanel.isVisible()).toBe false
 
     it "hides and shows the view", ->
@@ -45,18 +45,18 @@ describe "AtomClangGen", ->
       # workspaceElement to the DOM are generally slower than those off DOM.
       jasmine.attachToDOM(workspaceElement)
 
-      expect(workspaceElement.querySelector('.atom-clang-gen')).not.toExist()
+      expect(workspaceElement.querySelector('.atom-clang')).not.toExist()
 
       # This is an activation event, triggering it causes the package to be
       # activated.
-      atom.commands.dispatch workspaceElement, 'atom-clang-gen:toggle'
+      atom.commands.dispatch workspaceElement, 'atom-clang:toggle'
 
       waitsForPromise ->
         activationPromise
 
       runs ->
         # Now we can test for view visibility
-        atomClangGenElement = workspaceElement.querySelector('.atom-clang-gen')
+        atomClangGenElement = workspaceElement.querySelector('.atom-clang')
         expect(atomClangGenElement).toBeVisible()
-        atom.commands.dispatch workspaceElement, 'atom-clang-gen:toggle'
+        atom.commands.dispatch workspaceElement, 'atom-clang:toggle'
         expect(atomClangGenElement).not.toBeVisible()

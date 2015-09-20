@@ -1,18 +1,12 @@
 {
-  "name": "atom-clang-gen",
-  "main": "./lib/atom-clang-gen",
-  "version": "0.0.0",
-  "description": "A short description of your package",
-  "keywords": [
-  ],
-  "activationCommands": {
-    "atom-workspace": "atom-clang-gen:toggle"
-  },
-  "repository": "https://github.com/atom/atom-clang-gen",
+  "name": "atom-clang",
+  "main": "./lib/atom-clang",
+  "version": "0.1.0",
+  "description": "Clang integration for atom",
+  "keywords": [],
+  "activationCommands": {"atom-workspace": "atom-clang:toggle"},
+  "repository": "https://github.com/jjkr/atom-clang",
   "license": "MIT",
-  "engines": {
-    "atom": ">=1.0.0 <2.0.0"
-  },
-  "dependencies": {
-  }
+  "engines": {"atom": ">=1.0.0 <2.0.0"},
+  "dependencies": {"ffi": "^2.0.0"}
 }

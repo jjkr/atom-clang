@@ -1,0 +1,13 @@
+{
+  "context-menu": {
+    "atom-text-editor":
+        [{"label": "Toggle atom-clang", "command": "atom-clang:toggle"}]
+  },
+  "menu": [{
+    "label": "Packages",
+    "submenu": [{
+      "label": "Atom Clang",
+      "submenu": [{"label": "Toggle", "command": "atom-clang:toggle"}]
+    }]
+  }]
+}
