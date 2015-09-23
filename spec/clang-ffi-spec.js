@@ -1,7 +1,7 @@
 'use babel';
 
 import path from 'path';
-import libclang from '../lib/clang-ffi';
+import { libclang } from '../lib/clang-ffi';
 
 describe('libclang', () => {
   describe('index operations', () => {
